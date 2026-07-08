@@ -6,7 +6,7 @@ A full-stack **RAG (Retrieval Augmented Generation)** chatbot that lets users up
 
 ## 🚀 Live Demo
 
-🔗 **[Try it live](your-vercel-link-here)**
+🔗 **[Try it live](https://pdf-rag-chatbot-app.vercel.app/)**
 
 ---
 
@@ -121,7 +121,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 | Upload Page | Chat Interface |
 |---|---|
-| _add screenshot_ | _add screenshot_ |
+| <img width="1913" height="1019" alt="PDF RAG Chatbot _ Chat with your PDFs - Google Chrome 7_8_2026 8_53_37 PM" src="https://github.com/user-attachments/assets/b006b024-add8-4cc9-bafc-dc9000a81ac5" />
+ | <img width="1920" height="993" alt="PDF RAG Chatbot _ Chat with your PDFs - Google Chrome 7_8_2026 8_55_39 PM" src="https://github.com/user-attachments/assets/98430430-8d73-4305-8443-8d7c25d7df7c" />
+|
 
 ---
 
