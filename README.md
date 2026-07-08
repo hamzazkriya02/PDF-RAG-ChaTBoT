@@ -1,36 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📄 PDF-RAG-ChatBot
 
-## Getting Started
+A full-stack **RAG (Retrieval Augmented Generation)** chatbot that lets users upload a PDF and ask natural language questions about it. The AI answers using only the content extracted from the uploaded document — no hallucinations, just grounded, context-aware responses.
 
-First, run the development server:
+---
+
+## 🚀 Live Demo
+
+🔗 **[Try it live](your-vercel-link-here)**
+
+---
+
+## ✨ Features
+
+- 📤 Drag-and-drop PDF upload
+- ✂️ Automatic text extraction and chunking
+- 🧠 Semantic vector embeddings (Google Gemini)
+- 🔍 Fast similarity search with Pinecone vector database
+- 💬 Context-aware AI chat interface
+- ⚡ Built on Next.js 14 App Router
+
+---
+
+## 🧰 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js 14 (App Router), Tailwind CSS |
+| Backend | Next.js API Routes |
+| AI Model | Google Gemini (`gemini-2.5-flash`) |
+| Embeddings | Google Gemini (`gemini-embedding-001`) |
+| Vector Database | Pinecone (Serverless, Dense, 768-dim) |
+| PDF Parsing | `pdf-parse` |
+| Deployment | Vercel |
+
+---
+
+## 🏗️ How It Works
+
+1. User uploads a PDF on the home page
+2. Backend extracts raw text using `pdf-parse`
+3. Text is split into overlapping chunks (~500 characters)
+4. Each chunk is converted into a 768-dimension vector embedding using Gemini
+5. Vectors are stored in Pinecone along with metadata (document ID, chunk text)
+6. User asks a question on the chat page
+7. The question is embedded and used to query Pinecone for the top 5 most relevant chunks
+8. Gemini generates an answer using only the retrieved chunks as context
+9. The answer is displayed in the chat window
+
+---
+
+## 📂 Folder Structure
+
+```
+pdf-rag-chatbot/
+├── app/
+│   ├── api/
+│   │   ├── upload/route.js       ← PDF upload endpoint
+│   │   └── chat/route.js         ← Chat query endpoint
+│   ├── page.jsx                  ← Home page (upload UI)
+│   ├── chat/page.jsx             ← Chat interface
+│   └── layout.js                 ← Root layout
+│
+├── components/                   ← UI components
+├── lib/
+│   ├── pinecone.js                ← Pinecone client setup
+│   ├── embeddings.js              ← Generate vector embeddings
+│   ├── pdfParser.js                ← Extract text from PDF
+│   └── ragChain.js                 ← Core RAG logic
+│
+├── utils/
+│   └── chunkText.js               ← Split text into chunks
+│
+├── .env.local                     ← API keys (not committed)
+└── package.json
+```
+
+---
+
+## ⚙️ Getting Started Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/pdf-rag-chatbot.git
+cd pdf-rag-chatbot
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file in the root directory:
+
+```
+GOOGLE_API_KEY=your-gemini-api-key
+PINECONE_API_KEY=your-pinecone-api-key
+PINECONE_INDEX=your-pinecone-index-name
+```
+
+- Get a free Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey)
+- Get a free Pinecone API key from [Pinecone](https://app.pinecone.io)
+
+> ⚠️ When creating your Pinecone index, set **Dimensions = 768**, **Metric = Cosine**, **Vector type = Dense**.
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📸 Screenshots
 
-## Learn More
+| Upload Page | Chat Interface |
+|---|---|
+| _add screenshot_ | _add screenshot_ |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛣️ Roadmap / Future Improvements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [ ] Support multiple PDFs per session
+- [ ] Chat history persistence
+- [ ] Streaming responses
+- [ ] Support for DOCX and TXT files
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+## 🙋‍♂️ Author
+
+Built by **[Hamza Zakriya]** — feel free to connect on [LinkedIn](www.linkedin.com/in/muhammad-hamza-315hz02) or check out more projects on [GitHub](https://github.com/hamzazkriya02).
